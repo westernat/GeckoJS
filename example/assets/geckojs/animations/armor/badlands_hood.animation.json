@@ -1,0 +1,17 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.loop": {
+			"loop": true,
+			"animation_length": 4,
+			"bones": {
+				"rotation2": {
+					"position": ["-(math.sin(query.anim_time * 90) / 2 + 0.5)", 0, 0]
+				},
+				"rotation3": {
+					"position": ["math.sin(query.anim_time * 90) / 2 + 0.5", 0, 0]
+				}
+			}
+		}
+	}
+}
