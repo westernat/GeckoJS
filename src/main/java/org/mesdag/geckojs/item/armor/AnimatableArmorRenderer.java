@@ -7,7 +7,7 @@ import software.bernie.geckolib.cache.object.GeoBone;
 import software.bernie.geckolib.renderer.GeoArmorRenderer;
 import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer;
 
-public class AnimatableArmorRenderer extends GeoArmorRenderer<AnimatableArmorItem> {
+public class AnimatableArmorRenderer extends GeoArmorRenderer<AnimatableArmorItem> implements IAnimatableArmorRenderer {
     private final AnimatableArmorBuilder.BoneVisibilityCallback boneVisibilityCallback;
 
     public AnimatableArmorRenderer(ExtendedGeoModel<AnimatableArmorItem> model, AnimatableArmorBuilder.BoneVisibilityCallback boneVisibilityCallback) {

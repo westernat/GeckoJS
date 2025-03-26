@@ -93,6 +93,6 @@ public class AnimatableArmorBuilder extends ArmorItemBuilder {
 
     @FunctionalInterface
     public interface BoneVisibilityCallback {
-        void apply(AnimatableArmorRenderer renderer, EquipmentSlot slot);
+        void apply(IAnimatableArmorRenderer renderer, EquipmentSlot slot);
     }
 }
