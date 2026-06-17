@@ -1,5 +1,6 @@
 package org.mesdag.geckojs.item.armor;
 
+import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import dev.latvian.mods.kubejs.registry.RegistryInfo;
 import net.minecraft.client.model.HumanoidModel;
@@ -66,9 +67,10 @@ public class AnimatableArmorItem extends ArmorItem implements GeoItem {
         if (equipmentSlot == type.getSlot()) {
             if (!modified) {
                 this.modified = true;
-                Multimap<Attribute, AttributeModifier> defaultModifiers = super.getDefaultAttributeModifiers(equipmentSlot);
-                armorBuilder.attributes.forEach((r, m) -> defaultModifiers.put(RegistryInfo.ATTRIBUTE.getValue(r), m));
-                this.attributeModifiers = defaultModifiers;
+                ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
+                builder.putAll(super.getDefaultAttributeModifiers(equipmentSlot));
+                armorBuilder.attributes.forEach((r, m) -> builder.put(RegistryInfo.ATTRIBUTE.getValue(r), m));
+                this.attributeModifiers = builder.build();
             }
             return attributeModifiers;
         }
