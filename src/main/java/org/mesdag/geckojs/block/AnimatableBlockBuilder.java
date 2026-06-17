@@ -47,9 +47,9 @@ public class AnimatableBlockBuilder extends BlockBuilder {
     }
 
     public AnimatableBlockBuilder defaultGeoModel() {
-        blockModel.builder.setSimpleModel(new ResourceLocation(id.getNamespace(), "geo/block/" + id.getPath() + ".geo.json"));
-        blockModel.builder.setSimpleTexture(new ResourceLocation(id.getNamespace(), "textures/block/" + id.getPath() + ".png"));
-        blockModel.builder.setSimpleAnimation(new ResourceLocation(id.getNamespace(), "animations/block/" + id.getPath() + ".animation.json"));
+        blockModel.builder.setSimpleModel(ResourceLocation.fromNamespaceAndPath(id.getNamespace(), "geo/block/" + id.getPath() + ".geo.json"));
+        blockModel.builder.setSimpleTexture(ResourceLocation.fromNamespaceAndPath(id.getNamespace(), "textures/block/" + id.getPath() + ".png"));
+        blockModel.builder.setSimpleAnimation(ResourceLocation.fromNamespaceAndPath(id.getNamespace(), "animations/block/" + id.getPath() + ".animation.json"));
         return this;
     }
 
@@ -85,7 +85,7 @@ public class AnimatableBlockBuilder extends BlockBuilder {
             "parent", "block/block",
             "textures", Map.of("particle", id.getNamespace() + ":block/" + id.getPath())
         )).getAsJsonObject();
-        generator.json(new ResourceLocation(id.getNamespace(), "models/block/" + id.getPath()), blockModelJson);
+        generator.json(ResourceLocation.fromNamespaceAndPath(id.getNamespace(), "models/block/" + id.getPath()), blockModelJson);
     }
 
     @HideFromJS

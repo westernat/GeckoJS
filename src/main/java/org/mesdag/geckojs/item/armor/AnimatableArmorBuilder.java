@@ -49,9 +49,9 @@ public class AnimatableArmorBuilder extends ArmorItemBuilder {
     }
 
     public AnimatableArmorBuilder defaultGeoModel() {
-        armorModel.builder.setSimpleModel(new ResourceLocation(id.getNamespace(), "geo/armor/" + id.getPath() + ".geo.json"));
-        armorModel.builder.setSimpleTexture(new ResourceLocation(id.getNamespace(), "textures/armor/" + id.getPath() + ".png"));
-        armorModel.builder.setSimpleAnimation(new ResourceLocation(id.getNamespace(), "animations/armor/" + id.getPath() + ".animation.json"));
+        armorModel.builder.setSimpleModel(ResourceLocation.fromNamespaceAndPath(id.getNamespace(), "geo/armor/" + id.getPath() + ".geo.json"));
+        armorModel.builder.setSimpleTexture(ResourceLocation.fromNamespaceAndPath(id.getNamespace(), "textures/armor/" + id.getPath() + ".png"));
+        armorModel.builder.setSimpleAnimation(ResourceLocation.fromNamespaceAndPath(id.getNamespace(), "animations/armor/" + id.getPath() + ".animation.json"));
         return this;
     }
 

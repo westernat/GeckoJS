@@ -8,7 +8,7 @@ import software.bernie.geckolib.model.GeoModel;
 
 @SuppressWarnings("unused")
 public class ExtendedGeoModel<T extends GeoAnimatable> extends GeoModel<T> {
-    static final ResourceLocation EMPTY = new ResourceLocation("geckojs", "empty");
+    static final ResourceLocation EMPTY = ResourceLocation.fromNamespaceAndPath("geckojs", "empty");
     public final Builder<T> builder = new Builder<>();
 
     @Override

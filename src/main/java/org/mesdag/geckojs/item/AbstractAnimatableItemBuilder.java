@@ -66,9 +66,9 @@ public abstract class AbstractAnimatableItemBuilder<T extends Item & GeoItem> ex
     }
 
     public AbstractAnimatableItemBuilder<T> defaultGeoModel() {
-        itemModel.builder.setSimpleModel(new ResourceLocation(id.getNamespace(), "geo/item/" + id.getPath() + ".geo.json"));
-        itemModel.builder.setSimpleTexture(new ResourceLocation(id.getNamespace(), "textures/item/" + id.getPath() + ".png"));
-        itemModel.builder.setSimpleAnimation(new ResourceLocation(id.getNamespace(), "animations/item/" + id.getPath() + ".animation.json"));
+        itemModel.builder.setSimpleModel(ResourceLocation.fromNamespaceAndPath(id.getNamespace(), "geo/item/" + id.getPath() + ".geo.json"));
+        itemModel.builder.setSimpleTexture(ResourceLocation.fromNamespaceAndPath(id.getNamespace(), "textures/item/" + id.getPath() + ".png"));
+        itemModel.builder.setSimpleAnimation(ResourceLocation.fromNamespaceAndPath(id.getNamespace(), "animations/item/" + id.getPath() + ".animation.json"));
         return this;
     }
 

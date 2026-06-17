@@ -18,7 +18,7 @@ public class GeckoJSClient {
     public static void onClientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> GeckoJS.REGISTERED_SHIELD.forEach(id -> ItemProperties.register(
             RegistryInfo.ITEM.getValue(id),
-            new ResourceLocation("blocking"),
+            ResourceLocation.withDefaultNamespace("blocking"),
             (stack, world, living, itemId) -> living != null && living.isUsingItem() && living.getUseItem() == stack ? 1.0F : 0.0F
             )));
 
