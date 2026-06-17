@@ -1,0 +1,11 @@
+{
+    "parent": "geckojs:item/shield",
+    "overrides": [
+        {
+            "predicate": {
+                "blocking": 1
+            },
+            "model": "geckojs:item/shield_blocking"
+        }
+    ]
+}
