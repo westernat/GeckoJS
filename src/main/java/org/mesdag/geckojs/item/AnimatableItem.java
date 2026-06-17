@@ -12,7 +12,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
-import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.SingletonGeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -33,7 +32,7 @@ public class AnimatableItem extends BasicItemJS implements GeoItem {
     }
 
     @Override
-    public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level level, @NotNull Player player, @NotNull InteractionHand hand) {
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         if (level instanceof ServerLevel serverLevel && itemBuilder.usingAnimationCallback != null) {
             itemBuilder.usingAnimationCallback.call(this, serverLevel, (ServerPlayer) player, hand);
         }
@@ -41,7 +40,7 @@ public class AnimatableItem extends BasicItemJS implements GeoItem {
     }
 
     @Override
-    public @NotNull ItemStack finishUsingItem(@NotNull ItemStack itemStack, @NotNull Level level, @NotNull LivingEntity livingEntity) {
+    public ItemStack finishUsingItem(ItemStack itemStack, Level level, LivingEntity livingEntity) {
         if (level instanceof ServerLevel serverLevel && itemBuilder.finishUsingAnimationCallback != null) {
             itemBuilder.finishUsingAnimationCallback.call(this, serverLevel, livingEntity);
         }
@@ -49,7 +48,7 @@ public class AnimatableItem extends BasicItemJS implements GeoItem {
     }
 
     @Override
-    public void releaseUsing(@NotNull ItemStack itemStack, @NotNull Level level, @NotNull LivingEntity livingEntity, int tick) {
+    public void releaseUsing(ItemStack itemStack, Level level, LivingEntity livingEntity, int tick) {
         if (level instanceof ServerLevel serverLevel && itemBuilder.releaseUsingAnimationCallback != null) {
             itemBuilder.releaseUsingAnimationCallback.call(this, serverLevel, livingEntity, tick);
         }

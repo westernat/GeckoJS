@@ -7,21 +7,21 @@ import software.bernie.geckolib.cache.object.GeoBone;
 public interface IAnimatableArmorRenderer {
     void setAllVisible(boolean pVisible);
 
-    GeoBone getHeadBone();
+    @Nullable GeoBone getHeadBone();
 
-    GeoBone getBodyBone();
+    @Nullable GeoBone getBodyBone();
 
-    GeoBone getRightArmBone();
+    @Nullable GeoBone getRightArmBone();
 
-    GeoBone getLeftArmBone();
+    @Nullable GeoBone getLeftArmBone();
 
-    GeoBone getRightLegBone();
+    @Nullable GeoBone getRightLegBone();
 
-    GeoBone getLeftLegBone();
+    @Nullable GeoBone getLeftLegBone();
 
-    GeoBone getRightBootBone();
+    @Nullable GeoBone getRightBootBone();
 
-    GeoBone getLeftBootBone();
+    @Nullable GeoBone getLeftBootBone();
 
     void setBoneVisible(@Nullable GeoBone bone, boolean visible);
 }

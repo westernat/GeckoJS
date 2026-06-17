@@ -1,5 +1,6 @@
 package org.mesdag.geckojs.item.tool;
 
+import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import dev.latvian.mods.kubejs.registry.RegistryInfo;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
@@ -17,7 +18,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
-import org.jetbrains.annotations.NotNull;
 import org.mesdag.geckojs.item.AnimatableItemRenderer;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.SingletonGeoAnimatable;
@@ -40,7 +40,7 @@ public class AnimatablePickaxeItem extends PickaxeItem implements GeoItem {
     }
 
     @Override
-    public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level level, @NotNull Player player, @NotNull InteractionHand hand) {
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         if (level instanceof ServerLevel serverLevel && pickaxeItemBuilder.usingAnimationCallback != null) {
             pickaxeItemBuilder.usingAnimationCallback.call(this, serverLevel, (ServerPlayer) player, hand);
         }
@@ -48,7 +48,7 @@ public class AnimatablePickaxeItem extends PickaxeItem implements GeoItem {
     }
 
     @Override
-    public @NotNull ItemStack finishUsingItem(@NotNull ItemStack itemStack, @NotNull Level level, @NotNull LivingEntity livingEntity) {
+    public ItemStack finishUsingItem(ItemStack itemStack, Level level, LivingEntity livingEntity) {
         if (level instanceof ServerLevel serverLevel && pickaxeItemBuilder.finishUsingAnimationCallback != null) {
             pickaxeItemBuilder.finishUsingAnimationCallback.call(this, serverLevel, livingEntity);
         }
@@ -56,7 +56,7 @@ public class AnimatablePickaxeItem extends PickaxeItem implements GeoItem {
     }
 
     @Override
-    public void releaseUsing(@NotNull ItemStack itemStack, @NotNull Level level, @NotNull LivingEntity livingEntity, int tick) {
+    public void releaseUsing(ItemStack itemStack, Level level, LivingEntity livingEntity, int tick) {
         if (level instanceof ServerLevel serverLevel && pickaxeItemBuilder.releaseUsingAnimationCallback != null) {
             pickaxeItemBuilder.releaseUsingAnimationCallback.call(this, serverLevel, livingEntity, tick);
         }
@@ -66,13 +66,14 @@ public class AnimatablePickaxeItem extends PickaxeItem implements GeoItem {
     private boolean modified = false;
 
     @Override
-    public @NotNull Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(@NotNull EquipmentSlot equipmentSlot) {
+    public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot equipmentSlot) {
         if (equipmentSlot == EquipmentSlot.MAINHAND) {
             if (!modified) {
                 this.modified = true;
-                Multimap<Attribute, AttributeModifier> defaultModifiers = super.getDefaultAttributeModifiers(equipmentSlot);
-                pickaxeItemBuilder.attributes.forEach((r, m) -> defaultModifiers.put(RegistryInfo.ATTRIBUTE.getValue(r), m));
-                this.attributeModifiers = defaultModifiers;
+                ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
+                builder.putAll(super.getDefaultAttributeModifiers(equipmentSlot));
+                pickaxeItemBuilder.attributes.forEach((r, m) -> builder.put(RegistryInfo.ATTRIBUTE.getValue(r), m));
+                this.attributeModifiers = builder.build();
             }
             return attributeModifiers;
         }
@@ -80,7 +81,7 @@ public class AnimatablePickaxeItem extends PickaxeItem implements GeoItem {
     }
 
     @Override
-    public void initializeClient(@NotNull Consumer<IClientItemExtensions> consumer) {
+    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         consumer.accept(new IClientItemExtensions() {
             private AnimatableItemRenderer<AnimatablePickaxeItem> renderer;
 
