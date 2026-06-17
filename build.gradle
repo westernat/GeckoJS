@@ -15,7 +15,7 @@ version = mod_version
 group = mod_group_id
 
 base {
-    archivesName = "GeckoJS"
+    archivesName = mod_name
 }
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
@@ -126,9 +126,7 @@ tasks.withType(ProcessResources).configureEach {
             mod_license            : mod_license,
             mod_version            : mod_version,
             mod_authors            : mod_authors,
-            mod_description        : mod_description,
-            kubejs_version         : kubejs_version,
-            geckolib_version       : geckolib_version
+            mod_description        : mod_description
     ]
     inputs.properties replaceProperties
 
